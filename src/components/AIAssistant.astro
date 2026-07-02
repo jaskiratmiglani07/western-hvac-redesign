@@ -1,0 +1,635 @@
+---
+// src/components/AIAssistant.astro
+---
+
+<div class="ai-assistant-widget">
+  <!-- Pulsing floating trigger button -->
+  <button class="chat-trigger glass" aria-label="Open Chat Assistant">
+    <div class="trigger-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+    </div>
+    <span class="trigger-text">Ask Western AI</span>
+    <span class="unread-dot"></span>
+  </button>
+
+  <!-- Chat Window -->
+  <div class="chat-window glass">
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="assistant-info">
+        <div class="assistant-avatar">W</div>
+        <div class="assistant-details">
+          <h4>Western AI Assistant</h4>
+          <span class="status-indicator">
+            <span class="status-dot"></span>
+            Online • Ready to help
+          </span>
+        </div>
+      </div>
+      <button class="chat-close" aria-label="Close Chat">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Messages Container -->
+    <div class="chat-messages-container">
+      <div class="messages-scroll-area" id="chat-messages">
+        <!-- Initial Message -->
+        <div class="message bot-message">
+          <div class="message-bubble">
+            Hello! I am your Western Virtual Assistant. How can we help you with your home services today?
+          </div>
+        </div>
+        
+        <!-- Suggestions row -->
+        <div class="suggestions-row" id="initial-suggestions">
+          <button class="suggest-btn" data-action="troubleshoot">🔍 Troubleshoot System</button>
+          <button class="suggest-btn" data-action="book">📅 Book Service</button>
+          <button class="suggest-btn" data-action="rates">💰 Ask Rates / Financing</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Input Form -->
+    <form class="chat-input-area" id="chat-form">
+      <input type="text" id="chat-input" placeholder="Type a message..." autocomplete="off" />
+      <button type="submit" class="send-btn" aria-label="Send Message">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+  </div>
+</div>
+
+<style>
+  .ai-assistant-widget {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    font-family: var(--font-sans);
+  }
+
+  /* Floating Trigger Button */
+  .chat-trigger {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: 12px 20px;
+    border-radius: var(--rounded-pill);
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-normal);
+    color: var(--color-ink);
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .chat-trigger:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-primary);
+  }
+
+  .trigger-icon {
+    width: 22px;
+    height: 22px;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .trigger-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .unread-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--color-accent);
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    animation: bounce 1.5s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+  }
+
+  /* Chat Window Box */
+  .chat-window {
+    position: absolute;
+    bottom: 72px;
+    right: 0;
+    width: 350px;
+    height: 480px;
+    border-radius: var(--rounded-lg);
+    box-shadow: var(--shadow-xl);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    pointer-events: none;
+    transition: all var(--transition-normal);
+    background-color: var(--color-canvas);
+    border: 1px solid var(--color-border);
+  }
+
+  .ai-assistant-widget.active .chat-window {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
+
+  .ai-assistant-widget.active .chat-trigger {
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Chat Header */
+  .chat-header {
+    background-color: var(--color-ink);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .assistant-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+  }
+
+  .assistant-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--rounded-full);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 16px;
+  }
+
+  .assistant-details h4 {
+    color: var(--color-white);
+    font-size: 14.5px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 11px;
+    color: #a1a1aa;
+    font-weight: 500;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #22c55e;
+    border-radius: 50%;
+  }
+
+  .chat-close {
+    background: transparent;
+    border: none;
+    color: #a1a1aa;
+    cursor: pointer;
+    padding: 4px;
+    transition: color var(--transition-fast);
+  }
+
+  .chat-close:hover {
+    color: var(--color-white);
+  }
+
+  /* Messages Area */
+  .chat-messages-container {
+    flex-grow: 1;
+    overflow: hidden;
+    background-color: var(--color-canvas-soft);
+    position: relative;
+  }
+
+  .messages-scroll-area {
+    padding: var(--spacing-lg);
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+
+  /* Individual message bubbles */
+  .message {
+    display: flex;
+    max-width: 80%;
+  }
+
+  .bot-message {
+    align-self: flex-start;
+  }
+
+  .user-message {
+    align-self: flex-end;
+  }
+
+  .message-bubble {
+    padding: 10px 14px;
+    border-radius: var(--rounded-md);
+    font-size: 14.5px;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  .bot-message .message-bubble {
+    background-color: var(--color-white);
+    color: var(--color-ink);
+    border: 1px solid var(--color-border-light);
+    border-bottom-left-radius: 4px;
+  }
+
+  .user-message .message-bubble {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-bottom-right-radius: 4px;
+  }
+
+  /* Suggestions bubble buttons */
+  .suggestions-row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-xs);
+    width: 100%;
+  }
+
+  .suggest-btn {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    color: var(--color-ink-soft);
+    padding: 8px 12px;
+    border-radius: var(--rounded-sm);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition-fast);
+  }
+
+  .suggest-btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    transform: translateX(4px);
+  }
+
+  /* Chat Input Area */
+  .chat-input-area {
+    display: flex;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background-color: var(--color-white);
+    border-top: 1px solid var(--color-border-light);
+    align-items: center;
+  }
+
+  #chat-input {
+    flex-grow: 1;
+    border: none;
+    padding: 8px var(--spacing-sm);
+    font-size: 14.5px;
+    font-family: var(--font-sans);
+    color: var(--color-ink);
+    outline: none;
+  }
+
+  .send-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-primary);
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color var(--transition-fast);
+  }
+
+  .send-btn:hover {
+    color: var(--color-primary-dark);
+  }
+
+  /* Typing loader animation */
+  .typing-indicator {
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+    background-color: var(--color-white);
+    border-radius: var(--rounded-md);
+    align-self: flex-start;
+    border: 1px solid var(--color-border-light);
+  }
+
+  .typing-indicator span {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-body);
+    border-radius: 50%;
+    animation: typing 1.4s infinite ease-in-out;
+  }
+
+  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes typing {
+    0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+    45% { transform: scale(1); opacity: 1; }
+  }
+
+  /* Mobile size override */
+  @media (max-width: 480px) {
+    .chat-window {
+      width: calc(100vw - 32px);
+      right: 0;
+      height: 420px;
+    }
+  }
+</style>
+
+<script>
+  // Chat DOM Elements
+  const widget = document.querySelector('.ai-assistant-widget');
+  const trigger = document.querySelector('.chat-trigger');
+  const closeBtn = document.querySelector('.chat-close');
+  const chatMessages = document.getElementById('chat-messages');
+  const chatForm = document.getElementById('chat-form') as HTMLFormElement;
+  const chatInput = document.getElementById('chat-input') as HTMLInputElement;
+
+  // State Variables
+  let chatState = 'GREETING'; // GREETING, TROUBLESHOOTING, BOOKING_NAME, BOOKING_PHONE, BOOKING_SERVICE, COMPLETE
+  let userData = {
+    name: '',
+    phone: '',
+    service: '',
+    issue: ''
+  };
+
+  // Toggle widget view
+  trigger?.addEventListener('click', () => {
+    widget?.classList.add('active');
+    // Scroll to bottom
+    scrollToBottom();
+    // Hide unread dot
+    const unread = document.querySelector('.unread-dot') as HTMLElement;
+    if (unread) unread.style.display = 'none';
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    widget?.classList.remove('active');
+  });
+
+  // Scroll messages utility
+  function scrollToBottom() {
+    if (chatMessages) {
+      setTimeout(() => {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 50);
+    }
+  }
+
+  // Display bot message with simulated typing delay
+  function sendBotMessage(text: string, callback?: () => void) {
+    // 1. Add typing indicator
+    const typingInd = document.createElement('div');
+    typingInd.className = 'typing-indicator message bot-message';
+    typingInd.innerHTML = '<span></span><span></span><span></span>';
+    chatMessages?.appendChild(typingInd);
+    scrollToBottom();
+
+    // 2. Remove indicator and display real message after delay
+    setTimeout(() => {
+      typingInd.remove();
+      
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'message bot-message';
+      msgDiv.innerHTML = `<div class="message-bubble">${text}</div>`;
+      chatMessages?.appendChild(msgDiv);
+      scrollToBottom();
+      
+      if (callback) callback();
+    }, 1000);
+  }
+
+  // Display user message instantly
+  function sendUserMessage(text: string) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'message user-message';
+    msgDiv.innerHTML = `<div class="message-bubble">${text}</div>`;
+    chatMessages?.appendChild(msgDiv);
+    scrollToBottom();
+  }
+
+  // Add suggestion buttons utility
+  function displaySuggestions(buttons: { label: string, action: string }[]) {
+    setTimeout(() => {
+      const row = document.createElement('div');
+      row.className = 'suggestions-row';
+      buttons.forEach(btn => {
+        const b = document.createElement('button');
+        b.className = 'suggest-btn';
+        b.innerText = btn.label;
+        b.setAttribute('data-action', btn.action);
+        
+        b.addEventListener('click', () => {
+          row.remove();
+          handleAction(btn.label, btn.action);
+        });
+        row.appendChild(b);
+      });
+      chatMessages?.appendChild(row);
+      scrollToBottom();
+    }, 1100);
+  }
+
+  // Handle choice action (clicks on suggestion buttons)
+  function handleAction(label: string, action: string) {
+    sendUserMessage(label);
+
+    if (action === 'troubleshoot') {
+      chatState = 'TROUBLESHOOTING';
+      sendBotMessage("Let's troubleshoot! What is the primary issue you are facing?", () => {
+        displaySuggestions([
+          { label: "❄️ AC is not blowing cold air", action: "issue_ac" },
+          { label: "🔥 Furnace is not heating", action: "issue_heater" },
+          { label: "💧 Pipe or faucet is leaking", action: "issue_plumbing" },
+          { label: "⚡ Electrical breaker tripped", action: "issue_elec" }
+        ]);
+      });
+    } else if (action === 'book' || action === 'book_now') {
+      chatState = 'BOOKING_NAME';
+      sendBotMessage("I can certainly help you book a service call. Let's collect your contact details. What is your full name?");
+    } else if (action === 'rates') {
+      sendBotMessage("We quote all our jobs upfront on-site before starting, so there are never any surprises. We also offer 0% APR financing options for new system replacements.", () => {
+        displaySuggestions([
+          { label: "📅 Book a Free Estimate", action: "book" },
+          { label: "↩️ Back to main menu", action: "restart" }
+        ]);
+      });
+    } else if (action.startsWith('issue_')) {
+      userData.issue = label;
+      let advice = "";
+      if (action === 'issue_ac') {
+        advice = "Often, a system that won't cool is due to a clogged air filter or a tripped outside safety switch. Please check your air filter! If that is clean, the fan or compressor may need service.";
+      } else if (action === 'issue_heater') {
+        advice = "Make sure your thermostat is switched to 'HEAT' and the fan is on 'AUTO'. Also, verify the emergency switch (resembles a light switch near the furnace) is flipped ON.";
+      } else if (action === 'issue_plumbing') {
+        advice = "For leaks, we recommend shutting off the local shutoff valve (behind the toilet or under the sink) immediately to prevent water damage.";
+      } else {
+        advice = "A tripped breaker can happen under heavy load. If resetting it doesn't help or if it trips again instantly, avoid resetting it to prevent electrical hazard.";
+      }
+
+      sendBotMessage(advice + " Since this might require a certified technician, would you like to book a same-day appointment?", () => {
+        displaySuggestions([
+          { label: "📅 Yes, Book Service Call", action: "book" },
+          { label: "↩️ No, go back", action: "restart" }
+        ]);
+      });
+    } else if (action === 'restart') {
+      chatState = 'GREETING';
+      sendBotMessage("What else can I help you with today?", () => {
+        displaySuggestions([
+          { label: "🔍 Troubleshoot System", action: "troubleshoot" },
+          { label: "📅 Book Service", action: "book" },
+          { label: "💰 Ask Rates / Financing", action: "rates" }
+        ]);
+      });
+    }
+  }
+
+  // Handle Initial Suggestion Button Clicks
+  const initialSuggestions = document.getElementById('initial-suggestions');
+  if (initialSuggestions) {
+    const btns = initialSuggestions.querySelectorAll('.suggest-btn');
+    btns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const action = (e.target as HTMLElement).getAttribute('data-action') || '';
+        const label = (e.target as HTMLElement).innerText;
+        initialSuggestions.remove();
+        handleAction(label, action);
+      });
+    });
+  }
+
+  // Submit Text Input Flow
+  chatForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const val = chatInput.value.trim();
+    if (!val) return;
+
+    chatInput.value = '';
+    sendUserMessage(val);
+
+    // Process State Engine
+    if (chatState === 'GREETING') {
+      // Basic keyword parsing
+      const lowVal = val.toLowerCase();
+      if (lowVal.includes('schedule') || lowVal.includes('book') || lowVal.includes('appoint')) {
+        chatState = 'BOOKING_NAME';
+        sendBotMessage("I can help you get scheduled! What is your full name?");
+      } else if (lowVal.includes('ac') || lowVal.includes('cool') || lowVal.includes('furnace') || lowVal.includes('heat') || lowVal.includes('leak') || lowVal.includes('repair')) {
+        chatState = 'TROUBLESHOOTING';
+        sendBotMessage("It sounds like you need troubleshooting. What is the issue?", () => {
+          displaySuggestions([
+            { label: "❄️ AC is not blowing cold", action: "issue_ac" },
+            { label: "🔥 Furnace not heating", action: "issue_heater" },
+            { label: "💧 Plumbing leak", action: "issue_plumbing" },
+            { label: "⚡ Electrical issue", action: "issue_elec" }
+          ]);
+        });
+      } else if (lowVal.includes('price') || lowVal.includes('cost') || lowVal.includes('rate') || lowVal.includes('financ')) {
+        sendBotMessage("We believe in upfront, transparent pricing. We quote flat rates on-site before working, and have 0% financing for up to 18 months.", () => {
+          displaySuggestions([
+            { label: "📅 Book a Free Estimate", action: "book" },
+            { label: "↩️ Back to main menu", action: "restart" }
+          ]);
+        });
+      } else {
+        sendBotMessage("I understand! Let's get you set up with a service callback to resolve that. What is your full name?");
+        chatState = 'BOOKING_NAME';
+      }
+    } else if (chatState === 'TROUBLESHOOTING') {
+      userData.issue = val;
+      chatState = 'BOOKING_NAME';
+      sendBotMessage("Understood. I will pass those details to our scheduler. To secure your appointment, what is your full name?");
+    } else if (chatState === 'BOOKING_NAME') {
+      userData.name = val;
+      chatState = 'BOOKING_PHONE';
+      sendBotMessage(`Thanks, ${userData.name}. What is the best phone number to reach you at?`);
+    } else if (chatState === 'BOOKING_PHONE') {
+      userData.phone = val;
+      chatState = 'BOOKING_SERVICE';
+      sendBotMessage("Got it. Lastly, what type of service do you need?", () => {
+        displaySuggestions([
+          { label: "❄️ Air Conditioning / AC", action: "set_ac" },
+          { label: "🔥 Heating / Furnace", action: "set_heating" },
+          { label: "💧 Plumbing Care", action: "set_plumbing" },
+          { label: "⚡ Electrical Work", action: "set_electrical" }
+        ]);
+      });
+    } else if (chatState === 'BOOKING_SERVICE') {
+      // In case they typed instead of clicking
+      userData.service = val;
+      completeBooking();
+    }
+  });
+
+  // Handle booking service selections
+  // We dynamic catch clicks using delegating since rows are generated dynamically
+  chatMessages?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains('suggest-btn')) {
+      const action = target.getAttribute('data-action') || '';
+      const label = target.innerText;
+      
+      if (action.startsWith('set_')) {
+        target.parentElement?.remove();
+        sendUserMessage(label);
+        userData.service = label;
+        completeBooking();
+      }
+    }
+  });
+
+  function completeBooking() {
+    chatState = 'COMPLETE';
+    sendBotMessage(`Excellent. Thank you, ${userData.name}! I have submitted your request for ${userData.service || 'Home Service'}. A dispatcher will call you at ${userData.phone} shortly to confirm a service window.`, () => {
+      // Show confirmation checkmark or option to restart
+      displaySuggestions([
+        { label: "↩️ Start New Conversation", action: "restart" }
+      ]);
+    });
+  }
+</script>

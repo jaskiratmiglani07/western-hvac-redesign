@@ -1,0 +1,518 @@
+---
+// src/components/Reviews.astro
+
+const reviews = [
+  {
+    rating: 5,
+    title: "Incredible Same-Day Emergency Service",
+    text: "Our AC stopped working on a 100°F Friday afternoon in Meridian. I called Western, and a technician arrived within 90 minutes. He quickly replaced a blown capacitor and had our system running again. Very fair pricing!",
+    author: "Sarah M.",
+    location: "Meridian, ID",
+    date: "June 2026"
+  },
+  {
+    rating: 5,
+    title: "Highly Professional & Neat Installation",
+    text: "We had Western replace our entire furnace and AC unit. The installation crew was polite, wore boot covers, laid down drop cloths, and cleaned up perfectly. The new system is super quiet and our energy bills dropped immediately.",
+    author: "James R.",
+    location: "Eagle, ID",
+    date: "May 2026"
+  },
+  {
+    rating: 5,
+    title: "Upfront Pricing & Great Communication",
+    text: "Had a plumbing emergency with a backed-up drain. The plumber diagnosed the issue with a camera, showed me the blockage, and quoted a flat rate before starting. He cleared it within an hour. Excellent upfront pricing!",
+    author: "David K.",
+    location: "Boise, ID",
+    date: "April 2026"
+  },
+  {
+    rating: 5,
+    title: "EV Charger Install Made Easy",
+    text: "We hired Western to install an EV charger in our garage. The electrician was extremely knowledgeable, ran the conduit neatly, and made sure everything met Boise code. The financing option made it easy to bundle into our budget.",
+    author: "Emily L.",
+    location: "Boise Bench, ID",
+    date: "March 2026"
+  }
+];
+---
+
+<section id="reviews" class="reviews-section">
+  <div class="container">
+    <div class="reviews-header-block">
+      <!-- Left: Google Rating Trust summary -->
+      <div class="rating-summary-card glass">
+        <div class="google-logo-row">
+          <svg viewBox="0 0 24 24" width="28" height="28" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+          </svg>
+          <strong>Google Partner</strong>
+        </div>
+        <div class="stars-row">
+          <span class="stars-val">4.9</span>
+          <div class="stars">★★★★★</div>
+        </div>
+        <p class="rating-sub">Based on 2,450+ verified local Boise reviews</p>
+      </div>
+
+      <!-- Center: Section Copy -->
+      <div class="reviews-intro">
+        <div class="badge reviews-eyebrow">TESTIMONIALS</div>
+        <h2 class="reviews-title">What Your Neighbors Are Saying</h2>
+        <p class="lead reviews-subtitle">
+          Read real reviews from homeowners in Boise, Meridian, Eagle, and Nampa who have experienced the Western standard of care.
+        </p>
+      </div>
+
+      <!-- Right: Navigation arrows -->
+      <div class="carousel-controls">
+        <button class="carousel-control-btn prev-btn" aria-label="Previous Review">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+        </button>
+        <button class="carousel-control-btn next-btn" aria-label="Next Review">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Carousel Slider -->
+    <div class="carousel-wrapper">
+      <div class="carousel-track">
+        {reviews.map((rev) => (
+          <div class="review-slide">
+            <div class="review-card card">
+              <div class="review-card-top">
+                <div class="review-rating-stars">
+                  {"★".repeat(rev.rating)}
+                </div>
+                <span class="review-date">{rev.date}</span>
+              </div>
+              
+              <h3 class="review-card-title">"{rev.title}"</h3>
+              <p class="review-card-text">{rev.text}</p>
+              
+              <div class="review-author-row">
+                <div class="author-avatar">
+                  {rev.author.charAt(0)}
+                </div>
+                <div class="author-info">
+                  <strong>{rev.author}</strong>
+                  <span>{rev.location}</span>
+                </div>
+                <div class="verified-tag">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span>Verified Client</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Indicator Dots -->
+    <div class="carousel-indicators">
+      {reviews.map((_, idx) => (
+        <button class={`indicator-dot ${idx === 0 ? 'active' : ''}`} aria-label={`Go to slide ${idx + 1}`} data-index={idx}></button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .reviews-section {
+    background-color: var(--color-canvas-soft);
+    border-top: 1px solid var(--color-border-light);
+    border-bottom: 1px solid var(--color-border-light);
+    overflow: hidden;
+  }
+
+  .reviews-header-block {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    align-items: center;
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  /* Google trust card */
+  .rating-summary-card {
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 1px solid var(--color-border-light);
+    max-width: 320px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .google-logo-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--spacing-xs);
+  }
+
+  .stars-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xxs);
+  }
+
+  .stars-val {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .stars {
+    color: #f59e0b;
+    font-size: 18px;
+    letter-spacing: 1px;
+  }
+
+  .rating-sub {
+    font-size: 12px;
+    color: var(--color-body);
+    margin-bottom: 0;
+    font-weight: 500;
+  }
+
+  /* Intro Header */
+  .reviews-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reviews-eyebrow {
+    background-color: var(--color-canvas);
+    border-color: var(--color-border);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .reviews-title {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .reviews-subtitle {
+    margin-bottom: 0;
+    color: var(--color-body);
+  }
+
+  /* Controls */
+  .carousel-controls {
+    display: flex;
+    gap: var(--spacing-sm);
+    justify-content: flex-start;
+  }
+
+  .carousel-control-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--rounded-md);
+    background-color: var(--color-canvas);
+    border: 1px solid var(--color-border);
+    color: var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+  }
+
+  .carousel-control-btn:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Carousel Track & Slides */
+  .carousel-wrapper {
+    width: 100%;
+    overflow: visible; /* Allows sliding cards to overflow container edge nicely */
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform var(--transition-slow);
+    gap: var(--spacing-xl);
+    width: 100%;
+  }
+
+  .review-slide {
+    flex: 0 0 100%; /* Default 1-up mobile */
+    min-width: 0;
+  }
+
+  .review-card {
+    background-color: var(--color-canvas);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all var(--transition-normal);
+  }
+
+  .review-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .review-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .review-rating-stars {
+    color: #f59e0b;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+  }
+
+  .review-date {
+    font-size: 13px;
+    color: var(--color-body);
+    font-weight: 500;
+  }
+
+  .review-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-ink);
+    line-height: 1.3;
+  }
+
+  .review-card-text {
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--color-body);
+    margin-bottom: var(--spacing-xl);
+    font-style: italic;
+    flex-grow: 1;
+  }
+
+  .review-author-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    border-top: 1px solid var(--color-border-light);
+    padding-top: var(--spacing-lg);
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--rounded-full);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .author-info strong {
+    font-size: 15px;
+    color: var(--color-ink);
+  }
+
+  .author-info span {
+    font-size: 12px;
+    color: var(--color-body);
+  }
+
+  .verified-tag {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #10b981;
+    background-color: #ecfdf5;
+    padding: var(--spacing-xxs) var(--spacing-sm);
+    border-radius: var(--rounded-pill);
+    border: 1px solid #a7f3d0;
+  }
+
+  .verified-tag svg {
+    flex-shrink: 0;
+  }
+
+  /* Indicators */
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-2xl);
+  }
+
+  .indicator-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--rounded-full);
+    background-color: var(--color-border);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    padding: 0;
+  }
+
+  .indicator-dot.active {
+    background-color: var(--color-primary);
+    width: 24px;
+  }
+
+  /* Breakpoints */
+  @media (min-width: 768px) {
+    .reviews-header-block {
+      grid-template-columns: auto 1fr auto;
+      gap: var(--spacing-2xl);
+    }
+    
+    .review-slide {
+      flex: 0 0 calc(50% - 12px); /* 2-up on tablet/desktop */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .carousel-wrapper {
+      overflow: hidden; /* Hide overflow on desktop to lock it in grid container */
+    }
+  }
+</style>
+
+<script>
+  // Simple vanilla JS carousel controller
+  const track = document.querySelector('.carousel-track') as HTMLElement;
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+  const dots = document.querySelectorAll('.indicator-dot');
+  const slides = document.querySelectorAll('.review-slide');
+
+  let currentIndex = 0;
+
+  function getSlidesPerView() {
+    return window.innerWidth >= 768 ? 2 : 1;
+  }
+
+  function updateCarousel() {
+    const slidesCount = slides.length;
+    const slidesPerView = getSlidesPerView();
+    const maxIndex = slidesCount - slidesPerView;
+
+    // Boundary locks
+    if (currentIndex < 0) currentIndex = 0;
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+    // Calculate translate percentage
+    const gap = 24; // matches var(--spacing-xl) which is 24px
+    const slideWidth = slides[0].getBoundingClientRect().width;
+    const moveAmount = currentIndex * (slideWidth + gap);
+
+    if (track) {
+      track.style.transform = `translateX(-${moveAmount}px)`;
+    }
+
+    // Update active dot indicators
+    dots.forEach((dot, idx) => {
+      if (idx === currentIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
+      
+      // Hide dots that exceed the slide boundary
+      if (idx > maxIndex) {
+        (dot as HTMLElement).style.display = 'none';
+      } else {
+        (dot as HTMLElement).style.display = 'inline-block';
+      }
+    });
+
+    // Toggle button disabled states
+    if (prevBtn) {
+      if (currentIndex === 0) {
+        prevBtn.setAttribute('disabled', 'true');
+        prevBtn.classList.add('disabled-btn');
+      } else {
+        prevBtn.removeAttribute('disabled');
+        prevBtn.classList.remove('disabled-btn');
+      }
+    }
+
+    if (nextBtn) {
+      if (currentIndex === maxIndex) {
+        nextBtn.setAttribute('disabled', 'true');
+        nextBtn.classList.add('disabled-btn');
+      } else {
+        nextBtn.removeAttribute('disabled');
+        nextBtn.classList.remove('disabled-btn');
+      }
+    }
+  }
+
+  // Event Listeners
+  if (nextBtn && prevBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentIndex++;
+      updateCarousel();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex--;
+      updateCarousel();
+    });
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', (e) => {
+      const idx = parseInt((e.target as HTMLElement).getAttribute('data-index') || '0');
+      currentIndex = idx;
+      updateCarousel();
+    });
+  });
+
+  // Re-calculate on resize
+  window.addEventListener('resize', () => {
+    updateCarousel();
+  });
+
+  // Initial update
+  updateCarousel();
+</script>

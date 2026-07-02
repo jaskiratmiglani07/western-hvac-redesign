@@ -1,0 +1,303 @@
+---
+// src/components/Services.astro
+
+const services = [
+  {
+    id: "heating",
+    title: "Heating Services",
+    description: "Keep your home warm and cozy through Boise's chilly winters with our top-tier heating services.",
+    subServices: ["Furnace Repair & Installation", "Heat Pump Systems", "Boiler Maintenance", "Emergency Heating Service"],
+    badge: "Seasonal Checkup",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+    </svg>`, // Custom flame representation
+    iconColor: "var(--color-primary)"
+  },
+  {
+    id: "cooling",
+    title: "Air Conditioning",
+    description: "Ensure your home remains cool and comfortable with energy-efficient air conditioning systems.",
+    subServices: ["AC Repair & Troubleshooting", "AC Maintenance & Tuning", "Ductless Mini-Splits", "High-Efficiency AC Installs"],
+    badge: "Popular",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/>
+    </svg>`, // Snowflake representation
+    iconColor: "#0284c7"
+  },
+  {
+    id: "plumbing",
+    title: "Plumbing Services",
+    description: "From leaky faucets to complete main line sewer replacements, our licensed plumbers handle it all.",
+    subServices: ["Emergency Leak Repairs", "Water Heater Install & Tuning", "Drain Cleaning & Unclogging", "Sewer & Water Line Services"],
+    badge: "24/7 Support",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z"/>
+    </svg>`, // Water drop
+    iconColor: "#2563eb"
+  },
+  {
+    id: "electrical",
+    title: "Electrical Services",
+    description: "Keep your home safe and powered with our licensed and insured master electricians.",
+    subServices: ["Panel Upgrades & Replacements", "Lighting Repair & Outlets", "EV Charger Installations", "Whole-Home Generator Systems"],
+    badge: "Certified Only",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </svg>`, // Lightning bolt
+    iconColor: "#d97706"
+  },
+  {
+    id: "iaq",
+    title: "Indoor Air Quality",
+    description: "Breathe cleaner, healthier air with advanced filtration, humidifiers, and UV purifiers.",
+    subServices: ["Whole-Home Air Purifiers", "UV Air Sanitization", "Humidity Control Systems", "Duct Sealing & Vent Care"],
+    badge: "Health First",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.59-6.59A2 2 0 1 1 19 13H2"/>
+    </svg>`, // Wind/Air representation
+    iconColor: "#0d9488"
+  }
+];
+---
+
+<section id="services" class="services-section">
+  <div class="container">
+    <!-- Header Block -->
+    <div class="section-header text-center">
+      <div class="badge section-eyebrow">OUR EXPERTISE</div>
+      <h2 class="section-title">Complete Home Services</h2>
+      <p class="section-desc lead">
+        Western is your single point of contact for residential and commercial heating, cooling, plumbing, and electrical needs across Boise and the Treasure Valley.
+      </p>
+    </div>
+
+    <!-- Services Cards Grid -->
+    <div class="services-grid">
+      {services.map((service) => (
+        <div class="service-card card" id={`service-${service.id}`}>
+          <div class="service-card-header">
+            <div class="service-icon" style={`color: ${service.iconColor}; background-color: ${service.iconColor}12`}>
+              <Fragment set:html={service.icon} />
+            </div>
+            {service.badge && (
+              <span class="service-badge-pill" style={`background-color: ${service.iconColor}15; color: ${service.iconColor}`}>
+                {service.badge}
+              </span>
+            )}
+          </div>
+          
+          <h3 class="service-card-title">{service.title}</h3>
+          <p class="service-card-description">{service.description}</p>
+          
+          <ul class="service-bullet-list">
+            {service.subServices.map((sub) => (
+              <li>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                <span>{sub}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="service-card-action">
+            <a href="#schedule" class="btn-learn-more">
+              <span>Book Appointment</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services-section {
+    background-color: var(--color-canvas-soft);
+    border-top: 1px solid var(--color-border-light);
+    border-bottom: 1px solid var(--color-border-light);
+    position: relative;
+  }
+
+  .text-center {
+    text-align: center;
+    align-items: center;
+  }
+
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: var(--spacing-3xl);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .section-eyebrow {
+    margin-bottom: var(--spacing-md);
+    background-color: var(--color-canvas);
+  }
+
+  .section-title {
+    margin-bottom: var(--spacing-md);
+  }
+
+  /* Services Grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+
+  /* Custom Service Card */
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-canvas);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    transition: all var(--transition-normal);
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--color-border);
+  }
+
+  .service-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--rounded-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .service-icon :global(svg) {
+    width: 26px;
+    height: 26px;
+  }
+
+  .service-badge-pill {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--rounded-pill);
+  }
+
+  .service-card-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-ink);
+  }
+
+  .service-card-description {
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--color-body);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  /* Sub Services List */
+  .service-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-xl) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    flex-grow: 1; /* Pushes the button to the bottom */
+  }
+
+  .service-bullet-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink-soft);
+  }
+
+  .service-bullet-list li svg {
+    color: var(--color-primary);
+    flex-shrink: 0;
+  }
+
+  /* Action button in Card */
+  .service-card-action {
+    border-top: 1px solid var(--color-border-light);
+    padding-top: var(--spacing-lg);
+  }
+
+  .btn-learn-more {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-ink);
+    transition: color var(--transition-fast);
+  }
+
+  .btn-learn-more svg {
+    transition: transform var(--transition-fast);
+  }
+
+  .service-card:hover .btn-learn-more {
+    color: var(--color-primary);
+  }
+
+  .service-card:hover .btn-learn-more svg {
+    transform: translateX(4px);
+    color: var(--color-primary);
+  }
+
+  /* Responsive breakpoints */
+  @media (min-width: 640px) {
+    .services-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    
+    /* Make the middle plumbing card span full width or rearrange on desktop */
+    #service-plumbing {
+      /* Can style specifically if wanted, but standard grid looks clean */
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .services-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    .service-card {
+      padding: var(--spacing-lg); /* Slightly less padding on wide 5-up layout */
+    }
+    .service-card-title {
+      font-size: 18px;
+    }
+    .service-bullet-list li {
+      font-size: 14px;
+    }
+  }
+</style>

@@ -1,0 +1,407 @@
+---
+// src/components/Hero.astro
+---
+
+<section id="hero" class="hero-section">
+  <div class="container hero-container">
+    <div class="hero-content">
+      <!-- Tagline Eyebrow -->
+      <div class="badge hero-eyebrow animate-fade-in">
+        <span class="pulse-dot"></span>
+        <span>Same-Day Service Available Today</span>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 class="hero-title animate-slide-up">
+        Boise's Trusted <br class="desktop-only" />
+        <span class="text-gradient">HVAC Experts</span> <br />
+        Since 1967
+      </h1>
+
+      <!-- Supporting copy -->
+      <p class="lead hero-description animate-slide-up">
+        Providing same-day emergency repairs, installations, plumbing, and electrical services for residential and commercial customers. Licensed, insured, and ready 24/7.
+      </p>
+
+      <!-- Primary & Secondary CTAs -->
+      <div class="hero-actions animate-slide-up">
+        <a href="#schedule" class="btn btn-primary btn-lg">
+          <span>Schedule Service</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+        <a href="tel:2082040357" class="btn btn-outline btn-lg phone-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>Call Now</span>
+        </a>
+      </div>
+
+      <!-- Trust Badges Grid -->
+      <div class="hero-badges animate-fade-in">
+        <div class="trust-badge">
+          <div class="badge-icon rating-stars">
+            <span class="rating-number">4.9</span>
+            <span class="star">★</span>
+          </div>
+          <div class="badge-text">
+            <strong>Google Rating</strong>
+            <span>Thousands of satisfied clients</span>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <div class="badge-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <div class="badge-text">
+            <strong>Licensed & Insured</strong>
+            <span>100% certified technicians</span>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <div class="badge-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <div class="badge-text">
+            <strong>24/7 Availability</strong>
+            <span>No emergency charges</span>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <div class="badge-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+          </div>
+          <div class="badge-text">
+            <strong>Boise Native</strong>
+            <span>Serving Idaho since 1967</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side Hero Image -->
+    <div class="hero-image-wrapper animate-fade-in-right">
+      <div class="image-bg-decoration"></div>
+      <div class="image-card">
+        <img src="/hero_technician.png" alt="Friendly Western HVAC Technician helping a customer" class="hero-img" />
+        <div class="experience-card glass">
+          <div class="exp-number">59+</div>
+          <div class="exp-text">Years of Serving Boise</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding-top: 130px; /* Offset for fixed header */
+    padding-bottom: var(--spacing-4xl);
+    position: relative;
+    overflow: hidden;
+    background-color: var(--color-canvas);
+  }
+
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+  }
+
+  /* Content Column */
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-eyebrow {
+    background-color: var(--color-canvas-soft);
+    border-color: var(--color-border);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+    font-size: 14px;
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #22c55e;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    animation: pulse 1.6s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+    }
+    70% {
+      transform: scale(1);
+      box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+    }
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+    }
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-ink);
+    letter-spacing: -0.03em;
+    font-weight: 800;
+  }
+
+  .text-gradient {
+    color: var(--color-primary);
+    background: linear-gradient(135deg, var(--color-primary) 0%, #dc2626 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-description {
+    margin-bottom: var(--spacing-2xl);
+    max-width: 580px;
+    color: var(--color-body);
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    width: 100%;
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .hero-actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .phone-btn {
+    border-color: var(--color-border);
+  }
+
+  /* Badges Grid */
+  .hero-badges {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    width: 100%;
+    border-top: 1px solid var(--color-border-light);
+    padding-top: var(--spacing-2xl);
+  }
+
+  .trust-badge {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+  }
+
+  .trust-badge .badge-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--rounded-md);
+    background-color: var(--color-canvas-soft);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 1px solid var(--color-border-light);
+  }
+
+  .trust-badge .rating-stars {
+    background-color: #fef3c7;
+    color: #d97706;
+    border-color: #fde68a;
+    font-weight: 700;
+  }
+
+  .rating-number {
+    font-size: 13px;
+    margin-right: 2px;
+  }
+
+  .star {
+    font-size: 14px;
+  }
+
+  .badge-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+  }
+
+  .badge-text strong {
+    font-size: 14px;
+    color: var(--color-ink);
+  }
+
+  .badge-text span {
+    font-size: 12px;
+    color: var(--color-body);
+  }
+
+  /* Image Column */
+  .hero-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .image-bg-decoration {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    bottom: 20px;
+    left: 20px;
+    background-color: var(--color-canvas-soft);
+    border-radius: var(--rounded-lg);
+    z-index: 1;
+    border: 1px dashed var(--color-border);
+  }
+
+  .image-card {
+    position: relative;
+    z-index: 2;
+    border-radius: var(--rounded-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    aspect-ratio: 1;
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform var(--transition-slow);
+  }
+
+  .image-card:hover .hero-img {
+    transform: scale(1.03);
+  }
+
+  .experience-card {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    left: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--rounded-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .exp-number {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .exp-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: 70px;
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s forwards 0.2s;
+  }
+  .animate-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 0.8s forwards;
+  }
+  .hero-title.animate-slide-up {
+    animation-delay: 0.1s;
+  }
+  .hero-description.animate-slide-up {
+    animation-delay: 0.2s;
+  }
+  .hero-actions.animate-slide-up {
+    animation-delay: 0.3s;
+  }
+  .animate-fade-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    animation: fadeInRight 1s forwards 0.4s;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeInRight {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Responsive Adjustments */
+  @media (min-width: 480px) {
+    .hero-actions .btn {
+      flex: 0 0 auto;
+      width: auto;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero-container {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--spacing-4xl);
+    }
+    
+    .hero-title {
+      font-size: 56px;
+      line-height: 1.1;
+    }
+
+    .hero-image-wrapper {
+      max-width: 100%;
+    }
+    
+    .desktop-only {
+      display: inline;
+    }
+  }
+
+  @media (max-width: 1023px) {
+    .desktop-only {
+      display: none;
+    }
+  }
+</style>

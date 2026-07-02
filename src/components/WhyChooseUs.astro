@@ -1,0 +1,272 @@
+---
+// src/components/WhyChooseUs.astro
+
+const highlights = [
+  {
+    title: "Serving Boise Since 1967",
+    description: "Generations of families trust Western. We've been locally owned and operated in the Boise area for over 50 years.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+      <polyline points="9 22 9 12 15 12 15 22"/>
+    </svg>`
+  },
+  {
+    title: "Fully Licensed & Insured",
+    description: "Rest easy knowing your property is safe. Our technicians undergo strict drug testing and background checks.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>`
+  },
+  {
+    title: "Guaranteed Same-Day Service",
+    description: "AC went out? Heater blowing cold? We prioritize urgent issues and dispatch technicians the same day you call.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+    </svg>`
+  },
+  {
+    title: "Upfront, Honest Pricing",
+    description: "We quote the job, not the hour. You'll know exactly what you're paying before any work begins.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="12" y1="1" x2="12" y2="23"/>
+      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+    </svg>`
+  },
+  {
+    title: "Smart Financing Available",
+    description: "Manage system replacements easily. We offer flexible plans including low monthly payments and 0% APR options.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="4" width="20" height="16" rx="2" ry="2"/>
+      <line x1="2" y1="10" x2="22" y2="10"/>
+    </svg>`
+  },
+  {
+    title: "Highly Rated on Google",
+    description: "With a 4.9-star rating and thousands of reviews, local residents consistently trust us for top service.",
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>`
+  }
+];
+---
+
+<section id="why-choose-us" class="why-section">
+  <div class="container why-container">
+    <!-- Left column: Headline & Stats -->
+    <div class="why-intro">
+      <div class="badge why-eyebrow">THE WESTERN STANDARD</div>
+      <h2 class="why-title">Why Boise Homeowners <br />Trust Western</h2>
+      <p class="why-subtitle lead">
+        Since opening our doors in 1967, our mission has been simple: provide exceptional customer care, technical competence, and fast, reliable responses.
+      </p>
+      
+      <!-- Stats Inset -->
+      <div class="stats-row">
+        <div class="stat-item">
+          <span class="stat-num">59+</span>
+          <span class="stat-label">Years of Service</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">4.9★</span>
+          <span class="stat-label">Google Rating</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">Emergency Call Care</span>
+        </div>
+      </div>
+      
+      <div class="action-box">
+        <p class="action-text">Need urgent repairs? Our service dispatchers are active right now.</p>
+        <a href="tel:2082040357" class="btn btn-red">Call (208) 204-0357</a>
+      </div>
+    </div>
+
+    <!-- Right column: Cards Grid -->
+    <div class="why-grid">
+      {highlights.map((item) => (
+        <div class="why-card card">
+          <div class="why-card-icon">
+            <Fragment set:html={item.icon} />
+          </div>
+          <h3 class="why-card-title">{item.title}</h3>
+          <p class="why-card-description">{item.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-section {
+    background-color: var(--color-canvas);
+    position: relative;
+  }
+
+  .why-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3xl);
+    align-items: flex-start;
+  }
+
+  /* Intro Column */
+  .why-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .why-eyebrow {
+    background-color: var(--color-canvas-soft);
+    border-color: var(--color-border);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .why-title {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .why-subtitle {
+    margin-bottom: var(--spacing-2xl);
+    color: var(--color-body);
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-canvas-soft);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-lg) var(--spacing-xl);
+    width: 100%;
+    margin-bottom: var(--spacing-2xl);
+    gap: var(--spacing-md);
+    justify-content: space-around;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--color-primary);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-ink-soft);
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 40px;
+    background-color: var(--color-border);
+  }
+
+  /* Urgent CTA Inset */
+  .action-box {
+    background-color: var(--color-ink);
+    color: var(--color-white);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    width: 100%;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .action-text {
+    color: var(--color-canvas-soft);
+    font-size: 16px;
+    margin-bottom: var(--spacing-md);
+    font-weight: 500;
+  }
+
+  /* Right Grid Column */
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+
+  .why-card {
+    background-color: var(--color-canvas-soft);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-xl);
+    transition: all var(--transition-normal);
+  }
+
+  .why-card:hover {
+    background-color: var(--color-canvas);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+
+  .why-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--rounded-md);
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+  }
+
+  .why-card:hover .why-card-icon {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+  }
+
+  .why-card-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .why-card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-ink);
+  }
+
+  .why-card-description {
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--color-body);
+    margin-bottom: 0;
+  }
+
+  /* Responsive styles */
+  @media (min-width: 640px) {
+    .why-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .why-container {
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: var(--spacing-4xl);
+    }
+  }
+</style>

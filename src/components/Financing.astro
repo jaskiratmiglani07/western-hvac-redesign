@@ -1,0 +1,336 @@
+---
+// src/components/Financing.astro
+---
+
+<section id="financing" class="financing-section">
+  <div class="container financing-container">
+    
+    <!-- Left Column: Copy & Highlights -->
+    <div class="financing-intro">
+      <div class="badge financing-eyebrow">FLEXIBLE BUDGETING</div>
+      <h2 class="financing-title">Smart Financing Options For Your Home Comfort</h2>
+      <p class="lead financing-subtitle">
+        A failing HVAC, plumbing, or electrical system shouldn't derail your family's budget. We partner with top lenders to provide transparent, flexible payment solutions.
+      </p>
+      
+      <ul class="financing-perks-list">
+        <li>
+          <div class="perk-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="perk-text">
+            <strong>Immediate Same-Day Approvals</strong>
+            <span>Quick, secure online portal that returns decisions in minutes.</span>
+          </div>
+        </li>
+        <li>
+          <div class="perk-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="perk-text">
+            <strong>No Pre-Payment Penalties</strong>
+            <span>Pay off your loan early at any time without extra charges.</span>
+          </div>
+        </li>
+        <li>
+          <div class="perk-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div class="perk-text">
+            <strong>Paperless Online Management</strong>
+            <span>Manage payments and view balances easily through a simple dashboard.</span>
+          </div>
+        </li>
+      </ul>
+      
+      <a href="#schedule" class="btn btn-primary">Pre-Qualify Now</a>
+    </div>
+
+    <!-- Right Column: Financing Plan Cards -->
+    <div class="financing-cards">
+      <!-- Card 1: 0% Interest Option -->
+      <div class="financing-card card card-promo">
+        <div class="card-tag">MOST POPULAR</div>
+        <h3 class="plan-name">Interest-Free Promo</h3>
+        <div class="plan-rate">
+          <span class="rate-large">0%</span>
+          <span class="rate-label">APR Financing</span>
+        </div>
+        <div class="plan-term">For up to 18 Months</div>
+        
+        <div class="divider"></div>
+        
+        <ul class="plan-details">
+          <li>
+            <strong>Best for:</strong> Homeowners who want to pay off their new furnace or AC quickly without any added interest.
+          </li>
+          <li>
+            <strong>Minimum Purchase:</strong> $1,500
+          </li>
+          <li>
+            <strong>Promo details:</strong> Waived interest if paid in full within 18 months with regular monthly payments.
+          </li>
+        </ul>
+        
+        <a href="#schedule" class="btn btn-outline apply-btn">Apply For 0% Promo</a>
+      </div>
+
+      <!-- Card 2: Low Payment Option -->
+      <div class="financing-card card card-low-pay">
+        <h3 class="plan-name">Low Monthly Payment</h3>
+        <div class="plan-rate">
+          <span class="rate-large">As Low As</span>
+          <span class="rate-cost">$89</span>
+          <span class="rate-period">/mo</span>
+        </div>
+        <div class="plan-term">Flexible Terms Up to 120 Mos</div>
+        
+        <div class="divider"></div>
+        
+        <ul class="plan-details">
+          <li>
+            <strong>Best for:</strong> Full HVAC system and electrical panel replacements where long-term budget flexibility is the priority.
+          </li>
+          <li>
+            <strong>Interest Rates:</strong> Competitive fixed APR from 5.99%
+          </li>
+          <li>
+            <strong>Flexibility:</strong> Lower monthly payments that spread comfort cost over a long period.
+          </li>
+        </ul>
+        
+        <a href="#schedule" class="btn btn-outline apply-btn">Apply For Low Payments</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .financing-section {
+    background-color: var(--color-canvas);
+    border-top: 1px solid var(--color-border-light);
+    border-bottom: 1px solid var(--color-border-light);
+  }
+
+  .financing-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3xl);
+    align-items: center;
+  }
+
+  /* Intro Column */
+  .financing-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .financing-eyebrow {
+    background-color: var(--color-canvas-soft);
+    border-color: var(--color-border);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .financing-title {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .financing-subtitle {
+    margin-bottom: var(--spacing-2xl);
+    color: var(--color-body);
+  }
+
+  /* Perks List */
+  .financing-perks-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-2xl) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+
+  .financing-perks-list li {
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+  }
+
+  .perk-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: var(--rounded-full);
+    background-color: #ecfdf5;
+    color: #10b981;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .perk-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+  }
+
+  .perk-text strong {
+    font-size: 16px;
+    color: var(--color-ink);
+  }
+
+  .perk-text span {
+    font-size: 14.5px;
+    color: var(--color-body);
+  }
+
+  /* Cards Column */
+  .financing-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+    width: 100%;
+  }
+
+  .financing-card {
+    background-color: var(--color-canvas-soft);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--rounded-md);
+    padding: var(--spacing-2xl);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all var(--transition-normal);
+  }
+
+  .financing-card:hover {
+    background-color: var(--color-canvas);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-4px);
+  }
+
+  /* Promo Tag */
+  .card-tag {
+    position: absolute;
+    top: var(--spacing-lg);
+    right: var(--spacing-lg);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 8px;
+    border-radius: var(--rounded-sm);
+  }
+
+  .plan-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-ink-soft);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .plan-rate {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 2px;
+  }
+
+  .rate-large {
+    font-size: 54px;
+    font-weight: 850;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .rate-cost {
+    font-size: 54px;
+    font-weight: 850;
+    color: var(--color-ink);
+    line-height: 1;
+  }
+
+  .rate-label {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .rate-period {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-body);
+  }
+
+  .plan-term {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .divider {
+    height: 1px;
+    background-color: var(--color-border);
+    margin: var(--spacing-md) 0 var(--spacing-lg) 0;
+  }
+
+  /* Details list */
+  .plan-details {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--spacing-xl) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    font-size: 14.5px;
+    line-height: 1.5;
+    color: var(--color-body);
+    flex-grow: 1;
+  }
+
+  .plan-details li strong {
+    color: var(--color-ink);
+  }
+
+  .apply-btn {
+    width: 100%;
+    border-color: var(--color-border);
+  }
+
+  .financing-card:hover .apply-btn {
+    border-color: var(--color-primary);
+    color: var(--color-white);
+    background-color: var(--color-primary);
+  }
+
+  /* Responsive styles */
+  @media (min-width: 640px) {
+    .financing-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .financing-container {
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: var(--spacing-4xl);
+    }
+  }
+</style>

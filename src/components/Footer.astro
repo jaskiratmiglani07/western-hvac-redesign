@@ -1,0 +1,297 @@
+---
+// src/components/Footer.astro
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    
+    <!-- Column 1: Brand Info -->
+    <div class="footer-col brand-col">
+      <a href="/" class="footer-logo">
+        <div class="footer-logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 22h20L12 2z"/>
+            <path d="M12 18V6"/>
+          </svg>
+        </div>
+        <span class="footer-brand-name">WESTERN</span>
+      </a>
+      <p class="footer-brand-desc">
+        Serving Boise, Meridian, Eagle, and the Treasure Valley since 1967. Reliable heating, cooling, plumbing, and electrical services.
+      </p>
+      <div class="footer-contact-info">
+        <a href="tel:2082040357" class="footer-phone-tag">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          <span>(208) 204-0357</span>
+        </a>
+        <div class="footer-address">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <span>Boise, Idaho</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="footer-col links-col">
+      <h4 class="footer-title">Navigation</h4>
+      <ul class="footer-links-list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#why-choose-us">Why Choose Us</a></li>
+        <li><a href="#reviews">Testimonials</a></li>
+        <li><a href="#financing">Financing</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Services -->
+    <div class="footer-col links-col">
+      <h4 class="footer-title">Our Services</h4>
+      <ul class="footer-links-list">
+        <li><a href="#services">Heating Services</a></li>
+        <li><a href="#services">Air Conditioning</a></li>
+        <li><a href="#services">Plumbing Care</a></li>
+        <li><a href="#services">Electrical Work</a></li>
+        <li><a href="#services">Indoor Air Quality</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4: Hours & Licenses -->
+    <div class="footer-col hours-col">
+      <h4 class="footer-title">Availability</h4>
+      <p class="footer-hours-txt">
+        <strong>24/7 Live Operators</strong><br />
+        Same-Day Emergency Dispatch
+      </p>
+      
+      <div class="licenses-box">
+        <strong>State Certifications</strong>
+        <span>HVAC Lic #HVAC-0129</span>
+        <span>Plumbing Lic #PLB-9430</span>
+        <span>Electrical Lic #ELE-3928</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Bar -->
+  <div class="footer-bottom">
+    <div class="container bottom-container">
+      <p class="copyright-txt">
+        © {currentYear} Western Heating, Air Conditioning, Electrical & Plumbing. All rights reserved.
+      </p>
+      <div class="bottom-links">
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-canvas-dark);
+    color: #a1a1aa;
+    padding-top: var(--spacing-4xl);
+    border-top: 1px solid var(--color-border-dark);
+    font-size: 15px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3xl);
+    padding-bottom: var(--spacing-3xl);
+  }
+
+  /* Column 1: Brand */
+  .brand-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+  }
+
+  .footer-logo-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: var(--rounded-sm);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-logo-icon svg {
+    width: 18px;
+    height: 18px;
+    transform: rotate(45deg);
+  }
+
+  .footer-brand-name {
+    font-size: 22px;
+    font-weight: 850;
+    color: var(--color-white);
+    letter-spacing: -0.5px;
+  }
+
+  .footer-brand-desc {
+    line-height: 1.5;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .footer-contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-phone-tag {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-white);
+    transition: color var(--transition-fast);
+  }
+
+  .footer-phone-tag:hover {
+    color: var(--color-accent);
+  }
+
+  .footer-phone-tag svg {
+    color: var(--color-primary);
+  }
+
+  .footer-address {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .footer-address svg {
+    color: var(--color-primary);
+  }
+
+  /* Shared Lists */
+  .footer-title {
+    color: var(--color-white);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .footer-links-list a {
+    color: #a1a1aa;
+    transition: color var(--transition-fast);
+  }
+
+  .footer-links-list a:hover {
+    color: var(--color-white);
+    padding-left: 2px;
+  }
+
+  /* Hours / Licensing Column */
+  .footer-hours-txt {
+    line-height: 1.5;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .footer-hours-txt strong {
+    color: var(--color-white);
+  }
+
+  .licenses-box {
+    background-color: #1c1917;
+    border: 1px solid var(--color-border-dark);
+    padding: var(--spacing-md);
+    border-radius: var(--rounded-md);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+  }
+
+  .licenses-box strong {
+    color: var(--color-white);
+    margin-bottom: 2px;
+    display: block;
+  }
+
+  /* Bottom Bar */
+  .footer-bottom {
+    border-top: 1px solid var(--color-border-dark);
+    padding: var(--spacing-xl) 0;
+    background-color: #0f0f11;
+  }
+
+  .bottom-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .copyright-txt {
+    font-size: 13px;
+    margin-bottom: 0;
+  }
+
+  .bottom-links {
+    display: flex;
+    gap: var(--spacing-lg);
+    font-size: 13px;
+  }
+
+  .bottom-links a {
+    color: #71717a;
+    transition: color var(--transition-fast);
+  }
+
+  .bottom-links a:hover {
+    color: var(--color-white);
+  }
+
+  /* Responsive Grid sizes */
+  @media (min-width: 640px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+      gap: var(--spacing-xl);
+    }
+
+    .bottom-container {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+</style>
